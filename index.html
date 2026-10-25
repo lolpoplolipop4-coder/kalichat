@@ -19,16 +19,10 @@
 html, body { height: 100%; overflow: hidden; background: #0a0a0a; }
 body { display: flex; justify-content: center; align-items: center; perspective: 1500px; }
 
-/* Оболочка */
-.phone-frame {
-  width: 100%; max-width: 420px; height: 100vh; max-height: 900px;
-  background: var(--bg); color: var(--text); position: relative; overflow: hidden; display: flex; flex-direction: column;
-  animation: frameRise 0.9s var(--spring) both;
-}
+.phone-frame { width: 100%; max-width: 420px; height: 100vh; max-height: 900px; background: var(--bg); color: var(--text); position: relative; overflow: hidden; display: flex; flex-direction: column; animation: frameRise 0.9s var(--spring) both; }
 @keyframes frameRise { 0% { opacity: 0; transform: translateY(40px) scale(0.95); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
 @media (min-width: 500px) { .phone-frame { border-radius: 40px; box-shadow: 0 0 0 10px #1a1a1a, 0 20px 80px rgba(0,0,0,.9); height: 90vh; } }
 
-/* Общие стили */
 button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; transition: transform 0.25s var(--spring), box-shadow 0.3s; position: relative; overflow: hidden; }
 button:active { transform: scale(0.92); }
 input, textarea { font: inherit; color: inherit; outline: none; border: none; background: none; }
@@ -38,15 +32,10 @@ input, textarea { font: inherit; color: inherit; outline: none; border: none; ba
 .screen { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--bg); transition: transform 0.4s var(--out-expo), opacity 0.3s; z-index: 10; }
 .screen.hidden { opacity: 0; transform: translateX(30px); pointer-events: none; z-index: 0; }
 
-/* ЯРКИЕ КНОПКИ (Светящиеся) */
-.btn-primary { 
-  background: var(--yellow); color: #000; border-radius: 18px; padding: 16px; width: 100%; font-weight: 700; font-size: 16px; 
-  box-shadow: 0 0 20px rgba(255, 234, 0, 0.6), 0 4px 15px rgba(255, 234, 0, 0.4); 
-  transition: all 0.3s var(--spring); 
-}
+/* ЯРКИЕ КНОПКИ */
+.btn-primary { background: var(--yellow); color: #000; border-radius: 14px; padding: 16px; width: 100%; font-weight: 700; font-size: 15px; box-shadow: 0 0 20px rgba(255, 234, 0, 0.6), 0 4px 15px rgba(255, 234, 0, 0.4); transition: all 0.3s var(--spring); }
 .btn-primary:hover { background: var(--yellow-hover); box-shadow: 0 0 35px rgba(255, 234, 0, 0.9), 0 8px 25px rgba(255, 234, 0, 0.6); transform: translateY(-2px) scale(1.02); }
-
-.btn-outline { background: transparent; color: var(--yellow); border: 1.5px solid var(--yellow); border-radius: 18px; padding: 16px; width: 100%; font-weight: 600; font-size: 16px; box-shadow: 0 0 15px rgba(255,234,0,0.2); transition: all 0.3s; }
+.btn-outline { background: transparent; color: var(--yellow); border: 1.5px solid var(--yellow); border-radius: 14px; padding: 16px; width: 100%; font-weight: 600; font-size: 15px; box-shadow: 0 0 15px rgba(255,234,0,0.2); transition: all 0.3s; }
 .btn-outline:hover { background: rgba(255, 234, 0, 0.1); box-shadow: 0 0 25px rgba(255, 234, 0, 0.5); transform: translateY(-2px); }
 
 /* АВТОРИЗАЦИЯ */
@@ -72,6 +61,7 @@ input, textarea { font: inherit; color: inherit; outline: none; border: none; ba
 .chat-info { flex: 1; min-width: 0; }
 .chat-name { font-size: 15px; font-weight: 600; color: #fff; }
 .chat-preview { font-size: 14px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chat-type-badge { font-size: 10px; background: var(--bg-elem2); color: var(--yellow); padding: 2px 6px; border-radius: 4px; margin-left: 6px; }
 
 /* НИЖНЕЕ МЕНЮ */
 .bottom-nav { position: absolute; bottom: 0; left: 0; right: 0; height: calc(60px + env(safe-area-inset-bottom)); background: var(--bg-elem); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: flex-start; padding-top: 8px; padding-bottom: env(safe-area-inset-bottom); z-index: 100; }
@@ -117,16 +107,56 @@ input, textarea { font: inherit; color: inherit; outline: none; border: none; ba
 .menu-item.danger { color: var(--danger); }
 
 /* МОДАЛКИ */
-.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 10000; }
+.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 10000; }
 .modal-backdrop.show { display: flex; }
 .modal-content { background: var(--bg-elem); width: 90%; max-width: 360px; border-radius: 24px; padding: 20px; max-height: 80vh; overflow-y: auto; box-shadow: 0 0 40px rgba(0,0,0,0.8), 0 0 20px rgba(255, 234, 0, 0.1); }
 .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; text-align: center; }
 .close-modal { width: 100%; padding: 14px; background: var(--bg-elem2); border-radius: 14px; font-weight: 600; margin-top: 16px; text-align: center; cursor: pointer; }
+
+/* ЭКРАН ЗВОНКА */
+#callScreen { position: fixed; inset: 0; background: linear-gradient(180deg, #111 0%, #000 100%); z-index: 20000; display: none; flex-direction: column; align-items: center; justify-content: space-between; padding: 60px 20px 80px; color: #fff; animation: fadeInCall 0.3s ease; }
+@keyframes fadeInCall { from { opacity: 0; } to { opacity: 1; } }
+#callScreen.show { display: flex; }
+.call-avatar { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--yellow); padding: 4px; box-shadow: 0 0 40px rgba(255, 234, 0, 0.5); animation: pulseCall 2s infinite; }
+@keyframes pulseCall { 0% { box-shadow: 0 0 20px rgba(255, 234, 0, 0.4); } 50% { box-shadow: 0 0 60px rgba(255, 234, 0, 0.9); } 100% { box-shadow: 0 0 20px rgba(255, 234, 0, 0.4); } }
+.call-name { font-size: 26px; font-weight: 700; margin-top: 20px; }
+.call-status { font-size: 16px; color: var(--yellow); margin-top: 8px; }
+.call-actions { display: flex; gap: 30px; align-items: center; margin-bottom: 40px; }
+.call-btn { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; font-size: 24px; cursor: pointer; transition: all 0.2s var(--spring); }
+.call-btn:active { transform: scale(0.9); }
+.call-btn.danger { background: var(--danger); color: #fff; box-shadow: 0 0 20px rgba(255, 59, 48, 0.5); }
+.call-btn.success { background: var(--online); color: #fff; box-shadow: 0 0 20px rgba(52, 199, 89, 0.5); }
+.call-btn.neutral { background: var(--bg-elem2); color: #fff; border: 1px solid var(--border); }
+.call-btn.neutral.active { background: var(--yellow); color: #000; box-shadow: 0 0 20px rgba(255, 234, 0, 0.6); }
+
+/* Список участников */
+.user-checkbox-list { display: flex; flex-direction: column; gap: 8px; max-height: 200px; overflow-y: auto; margin-bottom: 16px; }
+.user-checkbox-item { display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: 12px; cursor: pointer; }
+.user-checkbox-item:hover { background: var(--bg-elem2); }
+.user-checkbox-item input { width: 18px; height: 18px; accent-color: var(--yellow); }
 </style>
 </head>
 <body>
 
 <div class="phone-frame">
+  <!-- ЭКРАН ЗВОНКА -->
+  <div id="callScreen">
+    <div style="text-align: center;">
+      <img class="call-avatar" id="callAvatar" src="" alt="">
+      <div class="call-name" id="callName">Имя</div>
+      <div class="call-status" id="callStatus">Входящий звонок...</div>
+    </div>
+    <div class="call-actions" id="incomingControls">
+      <button class="call-btn danger" onclick="endCall()">✕</button>
+      <button class="call-btn success" onclick="acceptCall()">✓</button>
+    </div>
+    <div class="call-actions" id="inCallControls" style="display: none;">
+      <button class="call-btn neutral" id="btnMute" onclick="toggleMute()">🎤</button>
+      <button class="call-btn danger" onclick="endCall()">✕</button>
+      <button class="call-btn neutral" id="btnSpeaker" onclick="toggleSpeaker()">🔊</button>
+    </div>
+  </div>
+
   <!-- АВТОРИЗАЦИЯ -->
   <div class="screen" id="screen-auth">
     <div class="auth-screen">
@@ -151,8 +181,10 @@ input, textarea { font: inherit; color: inherit; outline: none; border: none; ba
     <div class="auth-screen" style="padding-top:10px; justify-content: flex-start;">
       <div class="auth-form">
         <div class="input-group"><input type="text" id="regName" placeholder="Имя"></div>
+        <div class="input-group"><input type="tel" id="regPhone" placeholder="Номер телефона"></div>
+        <div class="input-group"><input type="text" id="regUsername" placeholder="Юзернейм (без @)"></div>
         <div class="input-group"><input type="email" id="regEmail" placeholder="Email"></div>
-        <div class="input-group"><input type="password" id="regPass" placeholder="Пароль (мин 6 символов)"></div>
+        <div class="input-group"><input type="password" id="regPass" placeholder="Пароль"></div>
         <button class="btn-primary" id="btnRegister" style="margin-top:10px;">Зарегистрироваться</button>
         <div id="regError" style="color:var(--danger);font-size:13px;text-align:center;min-height:20px;margin-top:10px;"></div>
       </div>
@@ -171,8 +203,45 @@ input, textarea { font: inherit; color: inherit; outline: none; border: none; ba
       <div class="chat-list" id="userList"></div>
       <div class="bottom-nav">
         <div class="nav-item active"><svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span>Чаты</span></div>
+        <div class="nav-item" onclick="nav('screen-contacts')"><svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Контакты</span></div>
+        <div class="nav-item" onclick="nav('screen-channels')"><svg class="icon" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg><span>Каналы</span></div>
         <div class="nav-item" onclick="nav('screen-settings')"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Настройки</span></div>
       </div>
+    </div>
+  </div>
+
+  <!-- ВКЛАДКА: КОНТАКТЫ -->
+  <div class="screen hidden" id="screen-contacts">
+    <div class="page-header">
+      <div style="width:24px;"></div>
+      <div class="page-title">Контакты</div>
+      <div style="width:24px;"></div>
+    </div>
+    <div style="padding: 0 20px 10px;">
+      <input type="text" id="contactSearch" placeholder="Поиск по номеру или @username" style="width:100%; padding:12px; border-radius:12px; background:var(--bg-elem); color:#fff;">
+    </div>
+    <div class="chat-list" id="contactsList" style="flex:1; overflow-y:auto;"></div>
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="nav('screen-chats')"><svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span>Чаты</span></div>
+      <div class="nav-item active"><svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Контакты</span></div>
+      <div class="nav-item" onclick="nav('screen-channels')"><svg class="icon" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg><span>Каналы</span></div>
+      <div class="nav-item" onclick="nav('screen-settings')"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Настройки</span></div>
+    </div>
+  </div>
+
+  <!-- ВКЛАДКА: КАНАЛЫ -->
+  <div class="screen hidden" id="screen-channels">
+    <div class="page-header">
+      <div style="width:24px;"></div>
+      <div class="page-title">Каналы и Группы</div>
+      <div style="width:24px;"></div>
+    </div>
+    <div class="chat-list" id="channelsList" style="flex:1; overflow-y:auto;"></div>
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="nav('screen-chats')"><svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span>Чаты</span></div>
+      <div class="nav-item" onclick="nav('screen-contacts')"><svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Контакты</span></div>
+      <div class="nav-item active"><svg class="icon" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg><span>Каналы</span></div>
+      <div class="nav-item" onclick="nav('screen-settings')"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Настройки</span></div>
     </div>
   </div>
 
@@ -183,7 +252,7 @@ input, textarea { font: inherit; color: inherit; outline: none; border: none; ba
       <img class="avatar" id="chat-avatar" src="" alt="">
       <div class="chat-header-info"><div class="chat-header-name" id="chat-title">—</div></div>
       <div class="chat-header-actions">
-        <button onclick="startCall(document.getElementById('chat-title').innerText)"><svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></button>
+        <button onclick="startCall(document.getElementById('chat-title').innerText, document.getElementById('chat-avatar').src)"><svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></button>
       </div>
     </div>
     <div class="messages-area" id="messages-area"></div>
@@ -229,19 +298,42 @@ input, textarea { font: inherit; color: inherit; outline: none; border: none; ba
   </div>
 </div>
 
-<!-- Модалка создания (Заглушка) -->
+<!-- Модалка создания -->
 <div class="modal-backdrop" id="createMenu">
   <div class="modal-content">
     <div class="modal-title">Создать</div>
-    <div class="menu-item">👥 Создать группу (в разработке)</div>
+    <div class="menu-item" onclick="openCreateGroupModal()">👥 Создать группу</div>
+    <div class="menu-item" onclick="openCreateChannelModal()">📢 Создать канал</div>
     <div class="close-modal" onclick="document.getElementById('createMenu').classList.remove('show')">Отмена</div>
+  </div>
+</div>
+
+<!-- Модалка Группы -->
+<div class="modal-backdrop" id="createGroupModal">
+  <div class="modal-content">
+    <div class="modal-title">Новая группа</div>
+    <div class="input-group" style="margin-bottom:10px;"><input type="text" id="groupName" placeholder="Название группы"></div>
+    <div style="color:var(--text-muted); font-size:12px; margin-bottom:8px;">Выберите участников:</div>
+    <div class="user-checkbox-list" id="groupMembersList"></div>
+    <button class="btn-primary" onclick="createGroup()">Создать</button>
+    <div class="close-modal" onclick="document.getElementById('createGroupModal').classList.remove('show')">Отмена</div>
+  </div>
+</div>
+
+<!-- Модалка Канала -->
+<div class="modal-backdrop" id="createChannelModal">
+  <div class="modal-content">
+    <div class="modal-title">Новый канал</div>
+    <div class="input-group" style="margin-bottom:10px;"><input type="text" id="channelName" placeholder="Название канала"></div>
+    <button class="btn-primary" onclick="createChannel()">Создать</button>
+    <div class="close-modal" onclick="document.getElementById('createChannelModal').classList.remove('show')">Отмена</div>
   </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, collection, doc, setDoc, getDoc, getDocs, query, orderBy, onSnapshot, addDoc, serverTimestamp, limit, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, doc, setDoc, getDoc, getDocs, query, where, orderBy, onSnapshot, addDoc, serverTimestamp, limit, deleteDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDs8Zs8pkudFR3Gm_DN3AKekP7IO4s584g",
@@ -257,6 +349,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 let currentUser = null, currentChat = null, messagesUnsub = null;
+let allUsersCache = [];
 
 window.nav = function(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
@@ -265,28 +358,26 @@ window.nav = function(id) {
 };
 
 // --- ЗВОНКИ ---
-window.startCall = async (targetName) => {
-  if(!confirm(`Позвонить абоненту ${targetName}?`)) return;
+let localStream = null;
+window.startCall = async (targetName, avatarUrl) => {
+  document.getElementById('callName').textContent = targetName;
+  document.getElementById('callAvatar').src = avatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(targetName)}&background=18181b&color=ffea00&size=200`;
+  document.getElementById('callStatus').textContent = 'Вызов...';
+  document.getElementById('incomingControls').style.display = 'none';
+  document.getElementById('inCallControls').style.display = 'flex';
+  document.getElementById('callScreen').classList.add('show');
+
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    alert(`📞 Звоним ${targetName}...\n(Микрофон включен, слышны гудки)`);
-    
-    // Звук гудков
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain); gain.connect(ctx.destination);
-    osc.frequency.value = 425; gain.gain.value = 0.1;
-    osc.start();
-    setTimeout(() => { 
-      osc.stop(); ctx.close(); 
-      stream.getTracks().forEach(t => t.stop());
-      alert('Звонок завершен.'); 
-    }, 3000);
-  } catch(e) {
-    alert('Нет доступа к микрофону.');
-  }
+    localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  } catch(e) { console.log(e); }
 };
+
+window.endCall = () => {
+  if(localStream) { localStream.getTracks().forEach(t => t.stop()); localStream = null; }
+  document.getElementById('callScreen').classList.remove('show');
+};
+window.toggleMute = () => { document.getElementById('btnMute').classList.toggle('active'); };
+window.toggleSpeaker = () => { document.getElementById('btnSpeaker').classList.toggle('active'); };
 
 // --- PUSH УВЕДОМЛЕНИЯ ---
 window.requestPushPermission = async () => {
@@ -300,13 +391,20 @@ window.requestPushPermission = async () => {
 // --- АВТОРИЗАЦИЯ ---
 document.getElementById('btnRegister').onclick = async () => {
   const name = document.getElementById('regName').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const username = document.getElementById('regUsername').value.trim().replace('@', '').toLowerCase();
   const email = document.getElementById('regEmail').value.trim();
   const pass = document.getElementById('regPass').value;
   const err = document.getElementById('regError'); err.textContent = '';
-  if(!name || !email || pass.length < 6) return err.textContent = 'Заполните поля (пароль от 6 символов)';
+  
+  if(!name || !phone || !username || !email || pass.length < 6) return err.textContent = 'Заполните поля (пароль от 6 символов)';
   try {
+    const q = query(collection(db, 'users'), where('username', '==', username));
+    const snap = await getDocs(q);
+    if (!snap.empty) return err.textContent = 'Этот юзернейм уже занят';
+
     const c = await createUserWithEmailAndPassword(auth, email, pass);
-    await setDoc(doc(db, 'users', c.user.uid), { uid: c.user.uid, name, email, createdAt: serverTimestamp(), avatar: '' });
+    await setDoc(doc(db, 'users', c.user.uid), { uid: c.user.uid, name, phone, username, email, createdAt: serverTimestamp(), avatar: '' });
   } catch(e) { err.textContent = 'Ошибка: ' + e.message; }
 };
 
@@ -321,7 +419,7 @@ onAuthStateChanged(auth, async (user) => {
   if(user) {
     const snap = await getDoc(doc(db, 'users', user.uid));
     if(snap.exists()) currentUser = snap.data();
-    else currentUser = { uid: user.uid, name: user.email.split('@')[0], email: user.email, avatar: '' };
+    else currentUser = { uid: user.uid, name: user.email.split('@')[0], username: user.email.split('@')[0], email: user.email, phone: 'Не указан', avatar: '' };
     
     updateProfileUI();
     loadUsers();
@@ -339,6 +437,7 @@ function getAvatarUrl(name, customAvatar) {
 function updateProfileUI() {
   const avatarUrl = getAvatarUrl(currentUser.name, currentUser.avatar);
   document.getElementById('profileName').textContent = currentUser.name;
+  document.getElementById('profileUsername').textContent = '@' + (currentUser.username || 'user');
   document.getElementById('profileImg').src = avatarUrl;
 }
 
@@ -364,48 +463,123 @@ document.getElementById('avatarInput').onchange = async (e) => {
   reader.readAsDataURL(file);
 };
 
-// --- СПИСОК ЧАТОВ ---
 async function loadUsers() {
+  // 1. Чаты
   const list = document.getElementById('userList'); list.innerHTML = '';
   const snap = await getDocs(collection(db, 'users'));
+  allUsersCache = [];
   snap.forEach(d => {
     const u = d.data();
+    allUsersCache.push(u);
     if(u.uid !== currentUser.uid) {
       const item = document.createElement('div'); item.className = 'chat-item';
       const av = getAvatarUrl(u.name, u.avatar);
-      item.innerHTML = `<img class="avatar" src="${av}"><div class="chat-info"><div class="chat-name">${u.name}</div><div class="chat-preview">Нажмите, чтобы написать</div></div>`;
-      item.onclick = () => openChat(u);
+      item.innerHTML = `<img class="avatar" src="${av}"><div class="chat-info"><div class="chat-name">${u.name}</div><div class="chat-preview">@${u.username || 'user'}</div></div>`;
+      item.onclick = () => openChat({ id: u.uid, name: u.name, avatar: av, type: 'private', otherUid: u.uid });
       list.appendChild(item);
+    }
+  });
+
+  // 2. Контакты (поиск)
+  const contactsList = document.getElementById('contactsList');
+  const renderContacts = (queryText = '') => {
+    contactsList.innerHTML = '';
+    allUsersCache.forEach(u => {
+      if(u.uid !== currentUser.uid) {
+        if (queryText && !u.phone?.includes(queryText) && !u.username?.includes(queryText)) return;
+        const item = document.createElement('div'); item.className = 'chat-item';
+        const av = getAvatarUrl(u.name, u.avatar);
+        item.innerHTML = `<img class="avatar" src="${av}"><div class="chat-info"><div class="chat-name">${u.name}</div><div class="chat-preview">@${u.username || 'user'}</div></div>`;
+        item.onclick = () => openChat({ id: u.uid, name: u.name, avatar: av, type: 'private', otherUid: u.uid });
+        contactsList.appendChild(item);
+      }
+    });
+  };
+  renderContacts();
+  document.getElementById('contactSearch').oninput = (e) => renderContacts(e.target.value.trim());
+
+  // 3. Каналы и группы
+  const channelsList = document.getElementById('channelsList'); channelsList.innerHTML = '';
+  const chatsSnap = await getDocs(collection(db, 'chats'));
+  chatsSnap.forEach(d => {
+    const c = d.data();
+    if(c.type === 'group' || c.type === 'channel') {
+      if(c.members && c.members.includes(currentUser.uid)) {
+        const item = document.createElement('div'); item.className = 'chat-item';
+        const badge = c.type === 'group' ? 'Группа' : 'Канал';
+        item.innerHTML = `<div class="avatar" style="background:var(--bg-elem2); display:grid; place-items:center; font-size:20px;">${c.type==='group'?'👥':'📢'}</div><div class="chat-info"><div class="chat-name">${c.name} <span class="chat-type-badge">${badge}</span></div><div class="chat-preview">${c.type==='group'?'Групповой чат':'Канал'}</div></div>`;
+        item.onclick = () => openChat({ id: d.id, name: c.name, type: c.type, adminId: c.adminId });
+        channelsList.appendChild(item);
+      }
     }
   });
 }
 
-// --- ЧАТ ---
-function chatIdFor(a, b) { return [a, b].sort().join('_'); }
+window.openCreateGroupModal = () => {
+  document.getElementById('createMenu').classList.remove('show');
+  document.getElementById('createGroupModal').classList.add('show');
+  const list = document.getElementById('groupMembersList'); list.innerHTML = '';
+  allUsersCache.forEach(u => {
+    if(u.uid !== currentUser.uid) {
+      const item = document.createElement('label'); item.className = 'user-checkbox-item';
+      item.innerHTML = `<input type="checkbox" value="${u.uid}"> <span>${u.name}</span>`;
+      list.appendChild(item);
+    }
+  });
+};
 
-function openChat(otherUser) {
-  currentChat = { id: chatIdFor(currentUser.uid, otherUser.uid), other: otherUser };
-  document.getElementById('chat-title').textContent = otherUser.name;
-  document.getElementById('chat-avatar').src = getAvatarUrl(otherUser.name, otherUser.avatar);
+window.createGroup = async () => {
+  const name = document.getElementById('groupName').value.trim();
+  if(!name) return alert('Введите название');
+  const checkboxes = document.querySelectorAll('#groupMembersList input:checked');
+  const members = [currentUser.uid, ...Array.from(checkboxes).map(c => c.value)];
+  
+  await addDoc(collection(db, 'chats'), { type: 'group', name, members, createdAt: serverTimestamp() });
+  document.getElementById('createGroupModal').classList.remove('show');
+  loadUsers();
+};
+
+window.openCreateChannelModal = () => {
+  document.getElementById('createMenu').classList.remove('show');
+  document.getElementById('createChannelModal').classList.add('show');
+};
+
+window.createChannel = async () => {
+  const name = document.getElementById('channelName').value.trim();
+  if(!name) return alert('Введите название');
+  await addDoc(collection(db, 'chats'), { type: 'channel', name, members: [currentUser.uid], adminId: currentUser.uid, createdAt: serverTimestamp() });
+  document.getElementById('createChannelModal').classList.remove('show');
+  loadUsers();
+};
+
+function openChat(target) {
+  currentChat = target;
+  document.getElementById('chat-title').textContent = target.name;
+  document.getElementById('chat-avatar').src = target.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(target.name) + '&background=ffea00&color=000';
   nav('screen-chat');
   
   if(messagesUnsub) messagesUnsub();
   const area = document.getElementById('messages-area'); area.innerHTML = '';
   
-  const q = query(collection(db, 'chats', currentChat.id, 'messages'), orderBy('createdAt', 'asc'), limit(100));
+  const q = query(collection(db, 'chats', target.id, 'messages'), orderBy('createdAt', 'asc'), limit(100));
   messagesUnsub = onSnapshot(q, (s) => {
     area.innerHTML = '';
     if(s.empty) { area.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:40px 20px;">Пока нет сообщений.</div>'; return; }
     
-    s.forEach((d) => {
+    s.forEach((d, index) => {
       const m = d.data();
       const out = m.senderId === currentUser.uid;
       const time = m.time || '';
+      const delay = Math.min(index * 0.05, 0.8);
+      
+      let mediaHtml = '';
+      if(m.image) mediaHtml = `<img src="${m.image}" style="max-width:100%; border-radius:10px; margin-bottom:5px;" onclick="window.open(this.src)">`;
+      let authorHtml = (!out && currentChat.type !== 'private') ? `<div class="msg-author">${m.senderName}</div>` : '';
       
       area.insertAdjacentHTML('beforeend', `
-        <div class="message-row ${out?'out':'in'}">
+        <div class="message-row ${out?'out':'in'}" style="animation-delay: ${delay}s">
           <div class="msg ${out?'out':'in'}">
-            <div>${m.text || ''}</div>
+            ${authorHtml}${mediaHtml}<div>${m.text || ''}</div>
             <div class="msg-meta">${time} ${out ? '✓✓' : ''}</div>
           </div>
         </div>`);
@@ -420,6 +594,11 @@ window.handleEnter = (e) => { if(e.key === 'Enter') { e.preventDefault(); sendMe
 window.sendMessage = async () => {
   const input = document.getElementById('msg-input'); const text = input.value.trim();
   if(!text || !currentChat) return;
+  
+  if (currentChat.type === 'channel' && currentChat.adminId !== currentUser.uid) {
+    return alert('В канале могут писать только администраторы!');
+  }
+  
   const now = new Date();
   const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
   input.value = '';
